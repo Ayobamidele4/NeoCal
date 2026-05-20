@@ -8,6 +8,6 @@ char name1[50] ;
 //to use   the scanf the takes     the \n as the enter kry or eof//
 printf("enter your name: \n");
 scanf("%s",name1);//takes only the first word and ignores the rest of the words//
-printf("welcome to the c programming world %s\n",name1);
+printf("welcome to the c programming world %s\n");
 return 0;
 }
