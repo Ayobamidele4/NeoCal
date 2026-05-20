@@ -1,3 +1,7 @@
 #include<stdio.h>
 int main(){
-printf("hello world\n");}
+char name[50];
+printf("enter your name: \n");
+fgets(name,50,stdin);
+printf("wlecome to the c programming world %s\n",name);
+}
