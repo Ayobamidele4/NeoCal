@@ -1,2 +1,20 @@
+# Build artifacts
+*.o
+neocal
 build/
-*.out
+*.a
+*.so
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+core
