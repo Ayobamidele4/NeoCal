@@ -1,30 +1,31 @@
-# NeoCal Makefile
-CC       := gcc
-CFLAGS   := -Wall -Wextra -Wpedantic -std=c11 -g
-INCLUDES := -I./include
+# Compiler configuration
+CC = gcc
+CFLAGS = -Wall -Wextra -O2
 
-SRC_DIR  := src
-BUILD_DIR:= build
-TARGET   := neocal
+# Linker flags (required for the math.h library)
+LDFLAGS = -lm
 
-SOURCES  := $(wildcard $(SRC_DIR)/*.c)
-OBJECTS  := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
+# Directories
+SRC_DIR = src
+BUILD_DIR = build
 
-all: directories $(TARGET)
+# Target executable name
+TARGET = $(BUILD_DIR)/neocal
 
-directories:
+# Find source files
+SRCS = $(SRC_DIR)/main.c
+
+# Default rule: compile everything
+all: $(TARGET)
+
+# Rule to create the build directory and compile the executable
+$(TARGET): $(SRCS)
 	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET) $(LDFLAGS)
 
-$(TARGET): $(OBJECTS)
-	$(CC) $(CFLAGS) -o $@ $^
-
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-run: all
-	./$(TARGET)
-
+# Clean rule: removes the generated binary and build folder
 clean:
-	rm -rf $(BUILD_DIR) $(TARGET)
+	rm -rf $(BUILD_DIR)
 
-.PHONY: all clean run directories
+# Phony targets to prevent conflicts with matching file names
+.PHONY: all clean
