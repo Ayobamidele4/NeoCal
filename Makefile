@@ -1,19 +1,22 @@
-# Compiler to use
+# Compiler and flags
 CC = gcc
-
-# Compiler flags (-Wall turns on all warnings, -g adds debugging info)
 CFLAGS = -Wall -g
 
-# The final executable name
-TARGET = neocal
+# Directories (relative to the root where Makefile lives)
+SRC_DIR = src
+BUILD_DIR = build
 
-# The default rule that runs when you just type 'make'
+# The final executable path
+TARGET = $(BUILD_DIR)/neocal
+
+# Default rule
 all: $(TARGET)
 
-# Rule to build the executable from the source file
-$(TARGET): neocal.c
-	$(CC) $(CFLAGS) -o $(TARGET) neocal.c
+# Rule to build the executable
+$(TARGET): $(SRC_DIR)/neocal.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC_DIR)/neocal.c
 
-# Rule to clean up the compiled executable and object files
+# Rule to clean up the build folder
 clean:
-	rm -f $(TARGET)
+	rm -rf $(BUILD_DIR)
