@@ -1,4 +1,15 @@
 #define _USE_MATH_DEFINES 
+#ifndef M_PI
+    #define M_PI 3.14159265358979323846
+#endif
+
+// Conversion constants
+#define DEG_TO_RAD (M_PI / 180.0)
+#define RAD_TO_DEG (180.0 / M_PI)
+#define GRAD_TO_RAD (M_PI / 200.0)
+#define RAD_TO_GRAD (200.0 / M_PI)
+#define DEG_TO_GRAD (200.0 / 180.0)
+#define GRAD_TO_DEG (180.0 / 200.0)
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
@@ -7,7 +18,7 @@
     #define M_PI 3.14159265358979323846
 #endif
 
-
+// Function prototypes
 double radtodeg(double a);
 double degtorad(double a);
 void trigonometry();
@@ -15,7 +26,7 @@ void sine();
 void cosine();
 void tangent();
 void sinhe();
-void cosineh();
+void cosineh(); 
 void tangenthe();
 void power();
 void squareroot();
@@ -38,7 +49,7 @@ double degtorad(double a) {
 
 void trigonometry(){
     int b; 
-    printf("choose an option:\n1. sine \t2. cosine \n3. tangent \t4. arctangent \n5. arccosine \t6. arcsine\n7. sinh \t8 cosh \n9. tanh\n");
+    printf("Choose an option:\n1. Sine \t2. Cosine \n3. Tangent \t4. Arctangent \n5. Arccosine \t6. Arcsine\n7. Sinh \t8. Cosh \n9. Tanh\n");
     scanf("%d", &b);
     
     switch(b){
@@ -46,226 +57,620 @@ void trigonometry(){
         case 2: cosine();     break;
         case 3: tangent();    break;
         case 7: sinhe();      break; 
-        case 8: cosineh();    break;
+        case 8: cosineh();    break; 
         case 9: tangenthe();  break;
         default: printf("Option not implemented yet!\n"); break;
     }
 }
 
 void sine(){
-    double a, c;
-    printf("enter the number: sin(");
-    scanf("%lf", &a);
-    
-    int num;
-    printf("choose which do you want your answer to be in  1.Degree\t 2.Radian \nelseif you want to convert a number 3. from radian to degree 4.degree to radian:  ");
-    scanf("%d", &num);
-    
-    if(num == 1){
-        double e = degtorad(a); 
-        c = sin(e);
-        printf("the sine of %lf in degrees is %lf\n", a, c);
-    }
-    else if(num == 2){
-        c = sin(a); 
-        printf("the sine of %lf in radian is %lf\n", a, c);
-    }
-    else if(num == 3){
-        double e = radtodeg(a);
-        printf("the value of %lf in degree is %lf\n", a, e);
-    }
-    else if(num == 4){
-        double e = degtorad(a);
-        printf("the value of %lf in radian is %lf\n", a, e);
-    }
-}
-
-void cosine(){
-    double a, c;
-    printf("enter the number: cos(");
-    scanf("%lf", &a);
-    c = cos(a);
-    printf("the cosine  of  %lf is %lf\n", a, c);
-}
-
-void tangent(){
-    double a, c;
-    printf("enter the number: tan(");
-    scanf("%lf", &a);
-    c = tan(a);
-    printf("the tangent  of  %lf is %lf\n", a, c);
-}
-
-void sinhe(){
-    double a, c;
-    printf("enter the number: sinh(");
-    scanf("%lf", &a);
-    c = sinh(a);
-    printf("the hyperbolic sine  of  %lf is %lf\n", a, c);
-}
-
-void cosineh(){
-    double a, c;
-    printf("enter the number: cosh(");
-    scanf("%lf", &a);
-    c = cosh(a);
-    printf("the hyperbolic cosine  of  %lf is %lf\n", a, c);
-}
-
-void tangenthe(){
-    double a, c;
-    printf("enter the number: tanh(");
-    scanf("%lf", &a);
-    c = tanh(a);
-    printf("the hyperbolic tangent of  %lf is %lf\n", a, c);
-}
-
-void power(){
-    double a, b, c;
-    printf("enter the first number and second number: ");
-    scanf("%lf %lf", &a, &b);
-    c = pow(a, b);
-    printf("%lf raised to the power %lf is %lf\n", a, b, c);
-}
-
-void squareroot(){
-    double a, c;
-    printf("enter the  number: ");
-    scanf("%lf", &a);
-    c = sqrt(a);
-    printf("the square-root  of %lf is %lf\n", a, c);
-}
-
-void absolutevalue(){
-    double a, c;
-    printf("enter the  number: ");
-    scanf("%lf", &a);
-    c = fabs(a);
-    printf("The absolute value  of %lf is %lf\n", a, c);
-}
-
-void roundup(){
-    double a, c;
-    printf("enter the number: ");
-    scanf("%lf", &a);
-    c = ceil(a);
-    printf("the rounding up of %lf to the nearest integer is %lf\n", a, c);
-}
-
-void rounddown(){
-    double a, c;
-    printf("enter the number: ");
-    scanf("%lf", &a);
-    c = floor(a);
-    printf("the rounding down of %lf to the nearest integer is %lf\n", a, c);
-}
-
-void rounding(){
-    double a, c;
-    printf("enter the number: ");
-    scanf("%lf", &a);
-    c = round(a);
-    printf("the rounding of %lf to the nearest integer is %lf\n", a, c);
-}
-
-void multiply(){
-    int a, b;
-    printf("enter two numbers: ");
-    scanf("%d %d", &a, &b);
-    printf("the product of %d and %d is %d\n", a, b, a * b);
-}
-
-void addition(){
-    int a, b, c, n;
-    printf("enter the number of memory needed: ");
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
     scanf("%d", &n);
-    int *p = malloc(n * sizeof(int));
-    if (p == NULL) { return; } // Safety check for malloc
     
-    for (int i = 0; i < n; i++){
-        printf("enter the first number: ");
-        scanf("%d", &a);
-        printf("enter the second number: ");
-        scanf("%d", &b);
-        p[i] = a + b;
-        printf("%d\n", p[i]);
-    }
-    
-    getchar();
-    char cd;
-    printf("do you want to go back to any operation: ");
-    scanf("%c", &cd);
-    if(cd == 'y'){
-        printf("enter the operation index you want to look at: ");
-        scanf("%d", &c);
-        if(c >= 0 && c < n) {
-            printf("%d\n", p[c]);
-        }
-    }
-    free(p); // Cleans memory leaks
-}
-
-void subtraction(){
-    int a, b, c, n;
-    printf("enter the number of memory needed: ");
-    scanf("%d", &n);
-    int *p = malloc(n * sizeof(int));
+    double *p = malloc(n * sizeof(double));
     if (p == NULL) { return; }
     
     for (int i = 0; i < n; i++){
-        printf("enter the first number: ");
-        scanf("%d", &a);
-        printf("enter the second number: ");
-        scanf("%d", &b);
-        p[i] = a - b;
-        printf("%d\n", p[i]);
+        double a;
+        printf("Enter number %d: sin(", i + 1);
+        scanf("%lf", &a);
+        
+        int num;
+        printf("Choose format:\n1. Degree\t2. Radian\n3. Convert Rad to Deg\t4. Convert Deg to Rad: ");
+        scanf("%d", &num);
+        
+        if(num == 1){
+            double e = degtorad(a); 
+            p[i] = sin(e);
+            printf("The sine of %lf degrees is %lf\n", a, p[i]);
+        }
+        else if(num == 2){
+            p[i] = sin(a); 
+            printf("The sine of %lf radians is %lf\n", a, p[i]);
+        }
+        else if(num == 3){
+            p[i] = radtodeg(a);
+            printf("The value of %lf in degrees is %lf\n", a, p[i]);
+        }
+        else if(num == 4){
+            p[i] = degtorad(a);
+            printf("The value of %lf in radians is %lf\n", a, p[i]);
+        }
     }
     
-    getchar();
     char cd;
-    printf("do you want to go back to any operation: ");
-    scanf("%c", &cd);
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
     if(cd == 'y'){
-        printf("enter the operation index you want to look at: ");
+        printf("Enter the operation index (0 to %d): ", n - 1);
         scanf("%d", &c);
         if(c >= 0 && c < n) {
-            printf("%d\n", p[c]);
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p);
+}
+
+void cosine(){
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double a;
+        printf("Enter number %d: cos(", i + 1);
+        scanf("%lf", &a);
+        p[i] = cos(a);
+        printf("The cosine of %lf is %lf\n", a, p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p);
+}
+
+void tangent(){
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double a;
+        printf("Enter number %d: tan(", i + 1);
+        scanf("%lf", &a);
+        p[i] = tan(a);
+        printf("The tangent of %lf is %lf\n", a, p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p);
+}
+
+void sinhe(){
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double a;
+        printf("Enter number %d: sinh(", i + 1);
+        scanf("%lf", &a);
+        p[i] = sinh(a);
+        printf("The hyperbolic sine of %lf is %lf\n", a, p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p);
+}
+
+void cosineh() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val;
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        p[i] = cosh(input_val);
+        printf("Cosh: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void tangenthe() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val; 
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        p[i] = tanh(input_val);
+        printf("Tanh: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void power() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double base, exponent; 
+        printf("Enter base number %d: ", i + 1);
+        scanf("%lf", &base);
+        printf("Enter exponent number %d: ", i + 1);
+        scanf("%lf", &exponent);
+        p[i] = pow(base, exponent);
+        printf("Result: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void squareroot() {     
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val; 
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        if(input_val < 0) {
+            printf("Error: Negative square root!\n");
+            p[i] = 0;
+        } else {
+            p[i] = sqrt(input_val);
+            printf("Square root: %lf\n", p[i]);
+        }
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+void angular_conversions() {
+    int c, n, conv_choice;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { 
+        printf("Memory allocation failed!\n");
+        return; 
+    }
+    
+    printf("\nChoose Conversion Type:\n");
+    printf("1. Degrees to Radians\t\t2. Radians to Degrees\n");
+    printf("3. Degrees to Gradians\t\t4. Gradians to Degrees\n");
+    printf("5. Radians to Gradians\t\t6. Gradians to Radians\n");
+    printf("Enter choice (1-6): ");
+    scanf("%d", &conv_choice);
+    
+    for(int i = 0; i < n; i++) {
+        double input_val;
+        printf("Enter value %d to convert: ", i + 1);
+        scanf("%lf", &input_val);
+        
+        switch(conv_choice) {
+            case 1: 
+                p[i] = input_val * DEG_TO_RAD; 
+                printf("%lf Degrees = %lf Radians\n", input_val, p[i]); 
+                break;
+            case 2: 
+                p[i] = input_val * RAD_TO_DEG; 
+                printf("%lf Radians = %lf Degrees\n", input_val, p[i]); 
+                break;
+            case 3: 
+                p[i] = input_val * DEG_TO_GRAD; 
+                printf("%lf Degrees = %lf Gradians\n", input_val, p[i]); 
+                break;
+            case 4: 
+                p[i] = input_val * GRAD_TO_DEG; 
+                printf("%lf Gradians = %lf Degrees\n", input_val, p[i]); 
+                break;
+            case 5: 
+                p[i] = input_val * RAD_TO_GRAD; 
+                printf("%lf Radians = %lf Gradians\n", input_val, p[i]); 
+                break;
+            case 6: 
+                p[i] = input_val * GRAD_TO_RAD; 
+                printf("%lf Gradians = %lf Radians\n", input_val, p[i]); 
+                break;
+            default: 
+                printf("Invalid variant, saving 0.\n"); 
+                p[i] = 0; 
+                break;
+        }
+    }
+    
+    char cd;
+    printf("Do you want to look back at any conversion history? (y/n): ");
+    scanf(" %c", &cd); 
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Converted value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p);
+}
+void absolutevalue() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val; 
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        p[i] = fabs(input_val);
+        printf("Absolute value: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void roundup() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val; 
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        p[i] = ceil(input_val);
+        printf("Rounded up value: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void rounddown() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val; 
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        p[i] = floor(input_val);
+        printf("Rounded down value: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void rounding() {
+    int c, n;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        double input_val; 
+        printf("Enter number %d: ", i + 1);
+        scanf("%lf", &input_val);
+        p[i] = round(input_val);
+        printf("Rounded value: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd); 
+    
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void multiply(){
+    int c, n;
+    double a, b;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        printf("Enter the first number: ");
+        scanf("%lf", &a);
+        printf("Enter the second number: ");
+        scanf("%lf", &b);
+        p[i] = a * b;
+        printf("Result: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd);
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void addition(){
+    int c, n;
+    double a, b;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; } 
+    
+    for (int i = 0; i < n; i++){
+        printf("Enter the first number: ");
+        scanf("%lf", &a);
+        printf("Enter the second number: ");
+        scanf("%lf", &b);
+        p[i] = a + b;
+        printf("Result: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd);
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
+        }
+    }
+    free(p); 
+}
+
+void subtraction(){
+    int c, n;
+    double a, b;
+    printf("Enter the number of memory slots needed: ");
+    scanf("%d", &n);
+    double *p = malloc(n * sizeof(double));
+    if (p == NULL) { return; }
+    
+    for (int i = 0; i < n; i++){
+        printf("Enter the first number: ");
+        scanf("%lf", &a);
+        printf("Enter the second number: ");
+        scanf("%lf", &b);
+        p[i] = a - b;
+        printf("Result: %lf\n", p[i]);
+    }
+    
+    char cd;
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd);
+    if(cd == 'y'){
+        printf("Enter the operation index (0 to %d): ", n - 1);
+        scanf("%d", &c);
+        if(c >= 0 && c < n) {
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
         }
     }
     free(p);
 }
 
 void division(){
-    int a, b, c, n;
-    printf("enter the number of memory needed: ");
+    int c, n;
+    double a, b;
+    printf("Enter the number of memory slots needed: ");
     scanf("%d", &n);
-    int *p = malloc(n * sizeof(int));
+    double *p = malloc(n * sizeof(double));
     if (p == NULL) { return; }
     
     for (int i = 0; i < n; i++){
-        printf("enter the first number: ");
-        scanf("%d", &a);
-        printf("enter the second number: ");
-        scanf("%d", &b);
+        printf("Enter the first number: ");
+        scanf("%lf", &a);
+        printf("Enter the second number: ");
+        scanf("%lf", &b);
         
         if(b == 0){
-            printf("division by zero is not allowed\n");
+            printf("Division by zero is not allowed!\n");
             p[i] = 0;
         }else{
             p[i] = a / b;
-            printf("%d\n", p[i]);
+            printf("Result: %lf\n", p[i]);
         }
     }
     
-    getchar();
     char cd;
-    printf("do you want to go back to any operation: ");
-    scanf("%c", &cd);
+    printf("Do you want to look back at any operation history? (y/n): ");
+    scanf(" %c", &cd);
     if(cd == 'y'){
-        printf("enter the operation index you want to look at: ");
+        printf("Enter the operation index (0 to %d): ", n - 1);
         scanf("%d", &c);
         if(c >= 0 && c < n) {
-            printf("%d\n", p[c]);
+            printf("Value at index %d: %lf\n", c, p[c]);
+        } else {
+            printf("Invalid index!\n");
         }
     }
     free(p);
@@ -274,27 +679,37 @@ void division(){
 int main(){
     int option, menu; 
     printf("Welcome to neocal\n");
-    printf("enter 1 to show menu or 0 to turn off: ");
-    scanf("%d", &menu);
     
-    if(menu == 0){
-        exit(0);
-    }else{
-        printf("MENU\nchoose an option\n1. Addition\t\t2. subtraction\n3. Multiplication\t4. Division\n5. Power\t\t6. Square-root\n7. Absolute-value\t8. Round-up\n9. Round-down\t\t10. Round\n11. Trigonometry\n");
-        scanf("%d", &option);
+    while(1) {
+        printf("\nEnter 1 to show menu or 0 to turn off: ");
+        scanf("%d", &menu);
         
-        if(option == 1){ addition(); }
-        else if(option == 2){ subtraction(); }
-        else if(option == 3){ multiply(); }
-        else if(option == 4){ division(); }
-        else if(option == 5){ power(); }
-        else if(option == 6){ squareroot(); }
-        else if(option == 7){ absolutevalue(); }
-        else if(option == 8){ roundup(); }
-        else if(option == 9){ rounddown(); }
-        else if(option == 10){ rounding(); }
-        else if(option == 11){ trigonometry(); }
-        else{ printf("invalid option\n"); }
+        if(menu == 0){
+            printf("Turning off neocal. Goodbye!\n");
+            break; 
+        } else if (menu == 1) {
+            printf("\n--- MENU ---\nChoose an option:\n");
+            printf("1. Addition\t\t2. Subtraction\n3. Multiplication\t4. Division\n");
+            printf("5. Power\t\t6. Square-root\n7. Absolute-value\t8. Round-up\n");
+            printf("9. Round-down\t\t10. Round\n11. Trigonometry\n12. Angular Conversions\n");
+            scanf("%d", &option);
+            
+            if(option == 1){ addition(); }
+            else if(option == 2){ subtraction(); }
+            else if(option == 3){ multiply(); }
+            else if(option == 4){ division(); }
+            else if(option == 5){ power(); }
+            else if(option == 6){ squareroot(); }
+            else if(option == 7){ absolutevalue(); }
+            else if(option == 8){ roundup(); }
+            else if(option == 9){ rounddown(); }
+            else if(option == 10){ rounding(); }
+            else if(option == 11){ trigonometry();}
+            else if(option == 12){ angular_conversions(); }
+            else{ printf("Invalid option!\n"); }
+        } else {
+            printf("Invalid input. Please choose 1 or 0.\n");
+        }
     }
     return 0;   
 }
