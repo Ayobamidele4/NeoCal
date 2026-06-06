@@ -15,7 +15,7 @@ Make sure you have a C compiler (like `gcc`) installed.
 
 ```bash
 # Clone the repository
-git clone [https://github.com/YOUR_USERNAME/neocal.git](https://github.com/YOUR_USERNAME/neocal.git)
+git clone [https://github.com/ayobamidele4/neocal.git](https://github.com/ayobamidele4/neocal.git)
 cd neocal
 
 # Compile the code
