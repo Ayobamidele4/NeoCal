@@ -1,1 +1,12 @@
+# ====================================================================
+# NEOCAL GIT IGNORE PROFILE
+# ====================================================================
+
+# Ignore the entire build output directory (executables & compiled objects)
 build/
+
+# Ignore user/editor configurations & crash backups
+.DS_Store
+*.swp
+*~
+*.o
