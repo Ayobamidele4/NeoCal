@@ -1,31 +1,19 @@
-# Compiler configuration
+# Compiler to use
 CC = gcc
-CFLAGS = -Wall -Wextra -O2
 
-# Linker flags (required for the math.h library)
-LDFLAGS = -lm
+# Compiler flags (-Wall turns on all warnings, -g adds debugging info)
+CFLAGS = -Wall -g
 
-# Directories
-SRC_DIR = src
-BUILD_DIR = build
+# The final executable name
+TARGET = neocal
 
-# Target executable name
-TARGET = $(BUILD_DIR)/neocal
-
-# Find source files
-SRCS = $(SRC_DIR)/main.c
-
-# Default rule: compile everything
+# The default rule that runs when you just type 'make'
 all: $(TARGET)
 
-# Rule to create the build directory and compile the executable
-$(TARGET): $(SRCS)
-	@mkdir -p $(BUILD_DIR)
-	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET) $(LDFLAGS)
+# Rule to build the executable from the source file
+$(TARGET): neocal.c
+	$(CC) $(CFLAGS) -o $(TARGET) neocal.c
 
-# Clean rule: removes the generated binary and build folder
+# Rule to clean up the compiled executable and object files
 clean:
-	rm -rf $(BUILD_DIR)
-
-# Phony targets to prevent conflicts with matching file names
-.PHONY: all clean
+	rm -f $(TARGET)
